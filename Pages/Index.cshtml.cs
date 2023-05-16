@@ -18,21 +18,21 @@ public class IndexModel : PageModel
         _mediator = mediator;
     }
 
-    // public async void OnGet()
-    // {
-    //     Message = "Loading async...";
-    //     _logger.LogInformation("1 - Received request");
-    //     var unitValue = await _mediator.Send(new DummyCommand("I'm a dummy!"));
-    //     _logger.LogInformation("6 - Completed request" + unitValue.ToString());
-    //     Message = "Done loading async!";
-    // }
-
-        public void OnGet()
+    public async Task OnGet()
     {
-        Message = "Loading sync...";
+        Message = "Loading async...";
         _logger.LogInformation("1 - Received request");
-        _mediator.Send(new DummyCommand("I'm a dummy!")).GetAwaiter().GetResult();
-        _logger.LogInformation("6 - Completed request");
-        Message = "Done loading sync!";
+        var unitValue = await _mediator.Send(new DummyCommand("I'm a dummy!"));
+        _logger.LogInformation("6 - Completed request" + unitValue.ToString());
+        Message = "Done loading async!";
     }
+
+    //     public void OnGet()
+    // {
+    //     Message = "Loading sync...";
+    //     _logger.LogInformation("1 - Received request");
+    //     _mediator.Send(new DummyCommand("I'm a dummy!")).GetAwaiter().GetResult();
+    //     _logger.LogInformation("6 - Completed request");
+    //     Message = "Done loading sync!";
+    // }
 }
